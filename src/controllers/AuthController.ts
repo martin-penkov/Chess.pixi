@@ -3,12 +3,16 @@ import { Analytics, getAnalytics } from "firebase/analytics";
 import { Auth, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, User } from "firebase/auth";
 import Application from "../Application";
 import Events from "../const/Events";
+import { Database, getDatabase } from "firebase/database";
+import { getMessaging, Messaging } from "firebase/messaging";
 
 export default class AuthController {
     private firebaseApp: FirebaseApp;
     private analytics: Analytics;
     private auth: Auth;
     private user: User;
+    private database: Database;
+    private messaging: Messaging;
 
     constructor() {
         // Import the functions you need from the SDKs you need
@@ -25,13 +29,16 @@ export default class AuthController {
             storageBucket: "chesspixi.appspot.com",
             messagingSenderId: "862140523943",
             appId: "1:862140523943:web:770d3b93ac67693c1e0282",
-            measurementId: "G-0EG6YFZ6NF"
+            measurementId: "G-0EG6YFZ6NF",
+            databaseURL: "https://chesspixi-default-rtdb.europe-west1.firebasedatabase.app/"
         };
 
         // Initialize Firebase
         this.firebaseApp = initializeApp(firebaseConfig);
         this.analytics = getAnalytics(this.firebaseApp);
         this.auth = getAuth(this.firebaseApp);
+        this.database = getDatabase(this.firebaseApp);
+        this.messaging = getMessaging(this.firebaseApp);
     }
 
     private login(email: string, password: string): void {
