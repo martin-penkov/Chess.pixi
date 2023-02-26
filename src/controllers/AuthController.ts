@@ -1,6 +1,6 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Analytics, getAnalytics } from "firebase/analytics";
-import { Auth, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, User } from "firebase/auth";
+import { Auth, getAuth, signInAnonymously, onAuthStateChanged, User } from "firebase/auth";
 import Application from "../Application";
 import Events from "../const/Events";
 import { Database, getDatabase } from "firebase/database";
@@ -39,33 +39,33 @@ export default class AuthController {
         this.auth = getAuth(this.firebaseApp);
         this.database = getDatabase(this.firebaseApp);
         this.messaging = getMessaging(this.firebaseApp);
+
+        this.signIn();
+
+        onAuthStateChanged(this.auth, this.onAuthStateChanged);
     }
 
-    private login(email: string, password: string): void {
-        signInWithEmailAndPassword(this.auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                this.user = userCredential.user;
-                Application.APP.dispatcher.emit(Events.AUTHENTICATED);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                //HANDLE the failed login
-            });
+    private onAuthStateChanged(user: User): void {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            this.user = user;
+            Application.APP.dispatcher.emit(Events.AUTHENTICATED);
+        } else {
+            this.user = null;
+            // User is signed out
+            // handle sign out...
+        }
     }
-    
-    private register(email: string, password: string): void {
-        createUserWithEmailAndPassword(this.auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                this.user = userCredential.user;
-                Application.APP.dispatcher.emit(Events.AUTHENTICATED);
+
+    private signIn(): void {
+        signInAnonymously(this.auth)
+            .then(() => {
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                //HANDLE the failed login
+                // handle failed sign in
             });
     }
 }

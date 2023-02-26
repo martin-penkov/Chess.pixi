@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import Events from './const/Events';
 import Controllers from './controllers/Controllers';
 import UrlParameter from './interfaces/UrlParameters';
 
@@ -17,10 +18,12 @@ export default class Application extends PIXI.Application {
 
         this.dispatcher = new PIXI.utils.EventEmitter();
         this.controllers = new Controllers();
+
+        this.dispatcher.addListener(Events.AUTHENTICATED, this.createGame, this);
     }
 
     private createGame(): void {
-        //once authenticated start loading assets
+        //once authenticated display lobby
         //...
     }
 
