@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import Events from './const/Events';
 import Controllers from './controllers/Controllers';
 import UrlParameter from './interfaces/UrlParameters';
+import ViewManager from './views/ViewManager';
 
 export default class Application extends PIXI.Application {
     private version: string = "beta-0.1";
@@ -9,6 +10,7 @@ export default class Application extends PIXI.Application {
     private controllers: Controllers;
     public static APP: Application;
     public dispatcher: PIXI.utils.EventEmitter;
+    public viewManager: ViewManager;
 
     constructor(options?: PIXI.IApplicationOptions) {
         super(options)
@@ -20,11 +22,15 @@ export default class Application extends PIXI.Application {
         this.controllers = new Controllers();
 
         this.dispatcher.addListener(Events.AUTHENTICATED, this.createGame, this);
+        //testing
+        this.createGame();
     }
 
     private createGame(): void {
         //once authenticated display lobby
         //...
+        this.viewManager = new ViewManager();
+        this.stage.addChildAt(this.viewManager, 0);
     }
 
     public getUrlParameters(): UrlParameter[] {

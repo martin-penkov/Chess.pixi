@@ -4,7 +4,6 @@ import { Auth, getAuth, signInAnonymously, onAuthStateChanged, User } from "fire
 import Application from "../Application";
 import Events from "../const/Events";
 import { Database, getDatabase } from "firebase/database";
-import { getMessaging, Messaging } from "firebase/messaging";
 
 export default class AuthController {
     private firebaseApp: FirebaseApp;
@@ -12,16 +11,9 @@ export default class AuthController {
     private auth: Auth;
     private user: User;
     private database: Database;
-    private messaging: Messaging;
 
     constructor() {
-        // Import the functions you need from the SDKs you need
-        
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
 
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyBlIWHvoG7nSuxK_quV0CCn1SQnAR9V66g",
             authDomain: "chesspixi.firebaseapp.com",
@@ -38,7 +30,6 @@ export default class AuthController {
         this.analytics = getAnalytics(this.firebaseApp);
         this.auth = getAuth(this.firebaseApp);
         this.database = getDatabase(this.firebaseApp);
-        this.messaging = getMessaging(this.firebaseApp);
 
         this.signIn();
 
