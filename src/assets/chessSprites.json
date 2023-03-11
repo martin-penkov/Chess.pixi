@@ -1,0 +1,63 @@
+{"frames": {
+
+"pieces_black_1-0.png":
+{
+	"frame": {"x":1,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pieces_black_1-1.png":
+{
+	"frame": {"x":18,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pieces_black_1-2.png":
+{
+	"frame": {"x":35,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pieces_black_1-3.png":
+{
+	"frame": {"x":52,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pieces_black_1-4.png":
+{
+	"frame": {"x":69,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pieces_black_1-5.png":
+{
+	"frame": {"x":86,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+}},
+"animations": {
+	"pieces_black_1": ["pieces_black_1-0.png","pieces_black_1-1.png","pieces_black_1-2.png","pieces_black_1-3.png","pieces_black_1-4.png","pieces_black_1-5.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "chessSprites.png",
+	"format": "RGBA8888",
+	"size": {"w":102,"h":17},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:21dfee714555570df736c8a2d2423097:53ce931ea91bd8ff43480b216d489583:7bf8c74922878f0fdef63b9d4ac359d1$"
+}
+}

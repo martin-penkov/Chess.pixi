@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.159",
+    "chess.js": "^1.0.0-beta.3",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.2.1",
     "firebase": "^9.17.1",
@@ -18,7 +19,7 @@
     "lodash": "^4.17.20",
     "mini-css-extract-plugin": "^0.10.0",
     "pixi.js": "6.2.2",
-    "ts-loader": "8.0.2",
+    "ts-loader": "^8.4.0",
     "typescript": "4.9.5",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
