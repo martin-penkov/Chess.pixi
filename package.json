@@ -16,6 +16,7 @@
     "copy-webpack-plugin": "^6.0.0",
     "css-loader": "^4.2.1",
     "firebase": "^9.17.1",
+    "gsap": "^3.11.4",
     "html-webpack-plugin": "^4.3.0",
     "lodash": "^4.17.20",
     "mini-css-extract-plugin": "^0.10.0",

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import Board from "./Board";
+import Board from "./board/Board";
 
 export default class ViewManager extends PIXI.Container {
     private board: Board;

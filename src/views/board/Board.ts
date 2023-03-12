@@ -1,7 +1,8 @@
 import * as PIXI from 'pixi.js';
+import Cell from './Cell';
 
 export default class Board extends PIXI.Container {
-    private cells: number;
+    private cells: Array<Cell>;
     private background: PIXI.Sprite;
     private cellSize: number = 100;
 
@@ -21,16 +22,14 @@ export default class Board extends PIXI.Container {
             }
             
             for (var j = 0; j < 8; ++j){
-                const square: PIXI.Graphics = new PIXI.Graphics();
-                let squareColor: number = 0xF0D9B5;
+                
+                let isBlack: boolean = false;
                 if((!isEvenRow && j % 2 === 0) || (isEvenRow && j % 2 !== 0)) {
-                    squareColor = 0xB58863;
+                    isBlack = true;
                 }
-                square.beginFill(squareColor);
-                // square.lineStyle(1, 0xFF0000);
-                square.drawRect(0, 0, this.cellSize, this.cellSize);
-                row.addChild(square)
-                square.x = j * this.cellSize;
+                
+                const cell: Cell = new Cell(isBlack, i, j, this.cellSize);
+                row.addChild(cell)
             }
             this.addChild(row);
             row.y = i * this.cellSize;
