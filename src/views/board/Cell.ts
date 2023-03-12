@@ -32,6 +32,17 @@ export default class Cell extends PIXI.Container {
         console.log(`Cell has position ${this.xPos} (X) and ${this.yPos} (Y)`);
     }
 
+    public attachFigure(figure: PIXI.Sprite): void {
+        let scaleRatio = (this.cellSize * 0.75) / figure.width;
+        figure.width = this.cellSize * 0.75;
+        figure.height *= scaleRatio;
+        figure.anchor.set(0.5, 0.5);
+        figure.x = this.xPos * this.cellSize + this.cellSize / 2;
+        figure.y = this.yPos * this.cellSize + this.cellSize / 2;
+        
+        this.addChild(figure);
+    }
+
     public init(): void {
         this.background = new PIXI.Graphics();
         if(this.isBlack){
@@ -43,6 +54,7 @@ export default class Cell extends PIXI.Container {
         this.background.drawRect(0, 0, this.cellSize, this.cellSize);
         this.addChild(this.background);
         this.background.x = this.xPos * this.cellSize;
+        this.background.y = this.yPos * this.cellSize;
         this.background.interactive = true;
     }
 }

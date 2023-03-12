@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { SCALE_MODES } from 'pixi.js';
 import Events from './const/Events';
 import Controllers from './controllers/Controllers';
 import UrlParameter from './interfaces/UrlParameters';
@@ -17,6 +18,7 @@ export default class Application extends PIXI.Application {
         Application.APP = this;
         this.urlParams = this.getUrlParameters();
         PIXI.settings.RESOLUTION = window.devicePixelRatio || 1;
+        PIXI.settings.SCALE_MODE = SCALE_MODES.NEAREST;
 
         this.dispatcher = new PIXI.utils.EventEmitter();
         this.controllers = new Controllers();
@@ -36,7 +38,7 @@ export default class Application extends PIXI.Application {
 
     private loadAssets(): void {
         this.loader
-        .add('./assets/chessSprites.png')
+        .add("spriteSheet", './assets/chessSprites.json')
         .load(this.createGame);
     }
 

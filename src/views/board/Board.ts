@@ -1,21 +1,21 @@
 import * as PIXI from 'pixi.js';
+import Application from '../../Application';
 import Cell from './Cell';
 
 export default class Board extends PIXI.Container {
-    private cells: Array<Cell>;
+    private cells: Array<Cell> = [];
     private background: PIXI.Sprite;
     private cellSize: number = 100;
 
     constructor() {
         super();
         this.createBackground();
-        this.createSquares();
+        this.createCells();
+        this.createFigures();
     }
 
-    private createSquares(): void {
+    private createCells(): void {
         for (var i = 0; i < 8; ++i){
-            var row: PIXI.Container = new PIXI.Container();
-            
             let isEvenRow: boolean = false;
             if(i % 2 === 0){
                 isEvenRow = true;
@@ -29,11 +29,19 @@ export default class Board extends PIXI.Container {
                 }
                 
                 const cell: Cell = new Cell(isBlack, i, j, this.cellSize);
-                row.addChild(cell)
+                this.addChild(cell)
+                this.cells.push(cell);
             }
-            this.addChild(row);
-            row.y = i * this.cellSize;
           }
+    }
+
+    private createFigures(): void {
+        
+        
+        this.cells.forEach(cell => {
+            let sprite = new PIXI.Sprite(Application.APP.loader.resources["spriteSheet"].spritesheet.textures["queen"]);
+            cell.attachFigure(sprite);
+        });
     }
 
     private createBackground(): void {
