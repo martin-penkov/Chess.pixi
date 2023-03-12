@@ -13,6 +13,7 @@
     "@types/lodash": "^4.14.159",
     "chess.js": "^1.0.0-beta.3",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.0",
     "css-loader": "^4.2.1",
     "firebase": "^9.17.1",
     "html-webpack-plugin": "^4.3.0",

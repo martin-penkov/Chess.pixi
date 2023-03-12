@@ -20,10 +20,11 @@ export default class Application extends PIXI.Application {
 
         this.dispatcher = new PIXI.utils.EventEmitter();
         this.controllers = new Controllers();
+        this.renderer.options.antialias = false;
 
+        this.createGame = this.createGame.bind(this);
         this.dispatcher.addListener(Events.AUTHENTICATED, this.createGame, this);
-        //testing
-        this.createGame();
+        this.loadAssets();
     }
 
     private createGame(): void {
@@ -31,6 +32,12 @@ export default class Application extends PIXI.Application {
         //...
         this.viewManager = new ViewManager();
         this.stage.addChildAt(this.viewManager, 0);
+    }
+
+    private loadAssets(): void {
+        this.loader
+        .add('./assets/chessSprites.png')
+        .load(this.createGame);
     }
 
     public getUrlParameters(): UrlParameter[] {
