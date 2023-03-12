@@ -1,6 +1,6 @@
 {"frames": {
 
-"rook":
+"rook-black":
 {
 	"frame": {"x":1,"y":1,"w":15,"h":15},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
 },
-"knight":
+"knight-black":
 {
 	"frame": {"x":18,"y":1,"w":15,"h":15},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
 },
-"officer":
+"bishop-black":
 {
 	"frame": {"x":35,"y":1,"w":15,"h":15},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
 },
-"queen":
+"queen-black":
 {
 	"frame": {"x":52,"y":1,"w":15,"h":15},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
 },
-"king":
+"king-black":
 {
 	"frame": {"x":69,"y":1,"w":15,"h":15},
 	"rotated": false,
@@ -40,24 +40,73 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
 },
-"pawn":
+"pawn-black":
 {
 	"frame": {"x":86,"y":1,"w":15,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
 	"sourceSize": {"w":15,"h":15}
+},
+"rook-white":
+{
+	"frame": {"x":103,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"knight-white":
+{
+	"frame": {"x":120,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"bishop-white":
+{
+	"frame": {"x":137,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"queen-white":
+{
+	"frame": {"x":154,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"king-white":
+{
+	"frame": {"x":171,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+"pawn-white":
+{
+	"frame": {"x":188,"y":1,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
 }},
 "animations": {
-	"pieces_black_1": ["pieces_black_1-0.png","pieces_black_1-1.png","pieces_black_1-2.png","pieces_black_1-3.png","pieces_black_1-4.png","pieces_black_1-5.png"]
+	"pieces_black_1": ["pieces_black_1-0.png","pieces_black_1-1.png","pieces_black_1-2.png","pieces_black_1-3.png","pieces_black_1-4.png","pieces_black_1-5.png"],
+	"pieces_white_1": ["pieces_white_1-0.png","pieces_white_1-1.png","pieces_white_1-2.png","pieces_white_1-3.png","pieces_white_1-4.png","pieces_white_1-5.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "chessSprites.png",
 	"format": "RGBA8888",
-	"size": {"w":102,"h":17},
+	"size": {"w":204,"h":17},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:21dfee714555570df736c8a2d2423097:53ce931ea91bd8ff43480b216d489583:7bf8c74922878f0fdef63b9d4ac359d1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:5b76dafcf901f9bd003d6667ff3bfb95:b4115639bab4c5918e4faf0acc75cad7:f7685ce34b78264c1d44a572b46ee881$"
 }
 }

@@ -1,11 +1,13 @@
 import * as PIXI from 'pixi.js';
 import gsap from "gsap";
+import { PieceSymbol } from 'chess.js';
 
 export default class Cell extends PIXI.Container {
     public isBlack: boolean;
     public yPos: number;
     public xPos: number;
     public cellSize: number;
+    public currentPieceSymbol: PieceSymbol = null;
 
     private color: number = 0xF0D9B5;
     private background: PIXI.Graphics;
@@ -32,7 +34,7 @@ export default class Cell extends PIXI.Container {
         console.log(`Cell has position ${this.xPos} (X) and ${this.yPos} (Y)`);
     }
 
-    public attachFigure(figure: PIXI.Sprite): void {
+    public attachFigure(figure: PIXI.Sprite, pieceSymbol: PieceSymbol): void {
         let scaleRatio = (this.cellSize * 0.75) / figure.width;
         figure.width = this.cellSize * 0.75;
         figure.height *= scaleRatio;
@@ -41,6 +43,7 @@ export default class Cell extends PIXI.Container {
         figure.y = this.yPos * this.cellSize + this.cellSize / 2;
         
         this.addChild(figure);
+        this.currentPieceSymbol = pieceSymbol;
     }
 
     public init(): void {

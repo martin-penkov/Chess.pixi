@@ -1,6 +1,17 @@
 import * as PIXI from 'pixi.js';
 import Application from '../../Application';
+import Events from '../../const/Events';
+import BoardData from '../../interfaces/BoardData';
 import Cell from './Cell';
+
+enum PieceSprite {
+    'p' = "pawn",
+    'n' = "knight",
+    'b' = "bishop",
+    'r' = "rook",
+    'q' = "queen",
+    'k' = "king"
+}
 
 export default class Board extends PIXI.Container {
     private cells: Array<Cell> = [];
@@ -12,6 +23,7 @@ export default class Board extends PIXI.Container {
         this.createBackground();
         this.createCells();
         this.createFigures();
+        Application.APP.dispatcher.on(Events.UPDATE_BOARD, this.updateBoard, this);
     }
 
     private createCells(): void {
@@ -38,9 +50,29 @@ export default class Board extends PIXI.Container {
     private createFigures(): void {
         
         
-        this.cells.forEach(cell => {
-            let sprite = new PIXI.Sprite(Application.APP.loader.resources["spriteSheet"].spritesheet.textures["queen"]);
-            cell.attachFigure(sprite);
+        // this.cells.forEach(cell => {
+        //     let sprite = new PIXI.Sprite(Application.APP.loader.resources["spriteSheet"].spritesheet.textures["queen"]);
+        //     cell.attachFigure(sprite);
+        // });
+    }
+
+    private updateBoard(): void {
+        const boardState: BoardData[][] = Application.APP.model.getCurrentBoardState();
+
+        boardState.forEach((row: BoardData[], yPos: number) => {
+            row.forEach((cell: BoardData, xPos: number) => {
+                let viewCell: Cell = this.cells.find(cell => cell.xPos === xPos && cell.yPos === yPos)
+                if((!cell && !viewCell.currentPieceSymbol) || (cell && viewCell.currentPieceSymbol === cell.type)) {
+                    return;
+                }
+
+                let sprite = new PIXI.Sprite(Application.APP.loader
+                    .resources["spriteSheet"]
+                    .spritesheet
+                    .textures[`${PieceSprite[cell.type]}-${cell.color === "w" ? "white" : "black"}`]);
+                //to be refactored ... reuse sprites
+                viewCell.attachFigure(sprite, cell.type);
+            })
         });
     }
 

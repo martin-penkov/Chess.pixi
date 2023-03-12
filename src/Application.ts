@@ -3,12 +3,14 @@ import { SCALE_MODES } from 'pixi.js';
 import Events from './const/Events';
 import Controllers from './controllers/Controllers';
 import UrlParameter from './interfaces/UrlParameters';
+import Model from './Model';
 import ViewManager from './views/ViewManager';
 
 export default class Application extends PIXI.Application {
     private version: string = "beta-0.1";
     private urlParams: UrlParameter[];
     private controllers: Controllers;
+    public model: Model;
     public static APP: Application;
     public dispatcher: PIXI.utils.EventEmitter;
     public viewManager: ViewManager;
@@ -22,6 +24,7 @@ export default class Application extends PIXI.Application {
 
         this.dispatcher = new PIXI.utils.EventEmitter();
         this.controllers = new Controllers();
+        this.model = new Model();
         this.renderer.options.antialias = false;
 
         this.createGame = this.createGame.bind(this);
@@ -34,6 +37,7 @@ export default class Application extends PIXI.Application {
         //...
         this.viewManager = new ViewManager();
         this.stage.addChildAt(this.viewManager, 0);
+        this.dispatcher.emit(Events.INITIALIZE_GAME);
     }
 
     private loadAssets(): void {
