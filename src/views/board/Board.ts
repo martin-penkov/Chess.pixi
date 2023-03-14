@@ -17,6 +17,8 @@ export default class Board extends PIXI.Container {
     private cells: Array<Cell> = [];
     private background: PIXI.Sprite;
     private cellSize: number = 100;
+    // private whitePieceTextures: Map<PieceSprite, PIXI.Texture> = new Map<PieceSprite, PIXI.Texture>();
+    // private blackPieceTextures: Map<PieceSprite, PIXI.Texture> = new Map<PieceSprite, PIXI.Texture>();
 
     constructor() {
         super();
@@ -48,7 +50,20 @@ export default class Board extends PIXI.Container {
     }
 
     private createFigures(): void {
-        
+        // Application.APP.model.getFigureIds().forEach(figureId => {
+        //     let whiteTexture: PIXI.Texture = Application.APP.loader
+        //         .resources["spriteSheet"]
+        //         .spritesheet
+        //         .textures[`${figureId as PieceSprite}-${"white"}`];
+
+        //     let blackTexture: PIXI.Texture = Application.APP.loader
+        //     .resources["spriteSheet"]
+        //     .spritesheet
+        //     .textures[`${figureId as PieceSprite}-${"black"}`];
+
+        //     this.whitePieceTextures.set(figureId as PieceSprite, whiteTexture);
+        //     this.blackPieceTextures.set(figureId as PieceSprite, blackTexture);
+        // });
         
         // this.cells.forEach(cell => {
         //     let sprite = new PIXI.Sprite(Application.APP.loader.resources["spriteSheet"].spritesheet.textures["queen"]);
@@ -70,8 +85,10 @@ export default class Board extends PIXI.Container {
                     .resources["spriteSheet"]
                     .spritesheet
                     .textures[`${PieceSprite[cell.type]}-${cell.color === "w" ? "white" : "black"}`]);
-                //to be refactored ... reuse sprites
+                
                 viewCell.attachFigure(sprite, cell.type);
+
+                //dont destroy sprites, just move them or make them smaller when they are taken for example
             })
         });
     }
