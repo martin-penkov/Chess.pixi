@@ -33,7 +33,7 @@ export default class AuthController {
 
         this.signIn();
 
-        onAuthStateChanged(this.auth, this.onAuthStateChanged);
+        // onAuthStateChanged(this.auth, this.onAuthStateChanged);
     }
 
     private onAuthStateChanged(user: User): void {

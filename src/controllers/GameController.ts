@@ -12,13 +12,29 @@ export default class GameController {
 
     public initializeGame(): void {
         this.chessGame = new Chess()
+        Application.APP.model.setCurrentChessGame(this.chessGame);
         Application.APP.model.updateBoardState(this.chessGame.board());
+        this.chessGame.moves();
         console.log(this.chessGame.board());
-        while (!this.chessGame.isGameOver()) {
-        const moves = this.chessGame.moves()
-        const move = moves[Math.floor(Math.random() * moves.length)]
-        this.chessGame.move(move)
-        }
         console.log(this.chessGame.pgn())
+        setTimeout(() => { this.makeRandomMove() }, 2000);
     }
+
+    public getChessGame(): Chess {
+        return this.chessGame;
+    }
+
+    private makeRandomMove () {
+        var possibleMoves = this.chessGame.moves()
+      
+        // exit if the game is over
+        if (this.chessGame.isGameOver()) return
+      
+        const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
+        this.chessGame.move(move)
+
+        console.log(this.chessGame.pgn())
+        Application.APP.model.updateBoardState(this.chessGame.board());
+        setTimeout(() => { this.makeRandomMove() }, 2000)
+      }
 }

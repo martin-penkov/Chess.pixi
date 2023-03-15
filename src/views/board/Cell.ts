@@ -1,13 +1,15 @@
 import * as PIXI from 'pixi.js';
 import gsap from "gsap";
-import { PieceSymbol } from 'chess.js';
+import { PieceSymbol, Square } from 'chess.js';
+import Figure from '../figures/Figure';
+import Application from '../../Application';
 
 export default class Cell extends PIXI.Container {
     public isBlack: boolean;
     public yPos: number;
     public xPos: number;
     public cellSize: number;
-    public currentPieceSymbol: PieceSymbol = null;
+    public currentFigure: Figure;
 
     private color: number = 0xF0D9B5;
     private background: PIXI.Graphics;
@@ -21,6 +23,10 @@ export default class Cell extends PIXI.Container {
         this.init();
         
         this.background.on("pointerup", this.detectInput, this);
+    }
+
+    public getCoordinates(): string {
+        return `${Application.APP.model.getXCoordsInWord()[this.xPos]}${8 - this.yPos}`;
     }
 
     private detectInput(): void {
@@ -42,8 +48,16 @@ export default class Cell extends PIXI.Container {
         figure.x = this.xPos * this.cellSize + this.cellSize / 2;
         figure.y = this.yPos * this.cellSize + this.cellSize / 2;
         
-        this.addChild(figure);
-        this.currentPieceSymbol = pieceSymbol;
+        // this.currentfigureSprite = figure;
+        // this.addChild(figure);
+        // this.currentPieceSymbol = pieceSymbol;
+    }
+
+    public removeFigure(): void {
+        // if(this.currentfigureSprite){
+        //     this.removeChild(this.currentfigureSprite);
+        //     this.currentPieceSymbol = null;
+        // }
     }
 
     public init(): void {
@@ -56,8 +70,8 @@ export default class Cell extends PIXI.Container {
         // this.background.lineStyle(1, 0xFF0000);
         this.background.drawRect(0, 0, this.cellSize, this.cellSize);
         this.addChild(this.background);
-        this.background.x = this.xPos * this.cellSize;
-        this.background.y = this.yPos * this.cellSize;
+        this.x = this.xPos * this.cellSize;
+        this.y = this.yPos * this.cellSize;
         this.background.interactive = true;
     }
 }
