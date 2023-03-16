@@ -29,8 +29,13 @@ export default class Figure extends PIXI.Container {
 
     public changeCell(cell: Cell): void {
         this.currentCell = cell;
+        this.currentCell.currentFigure = this;
 
-        this.x = this.currentCell.x + this.currentCell.width / 2;
-        this.y = this.currentCell.y + this.currentCell.height / 2;
+        gsap.to(this, {
+            x: this.currentCell.x + this.currentCell.width / 2,
+            y: this.currentCell.y + this.currentCell.height / 2,
+            duration: 0.1
+        });
+        
     }
 }

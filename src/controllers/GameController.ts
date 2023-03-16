@@ -17,7 +17,9 @@ export default class GameController {
         this.chessGame.moves();
         console.log(this.chessGame.board());
         console.log(this.chessGame.pgn())
-        setTimeout(() => { this.makeRandomMove() }, 2000);
+        setTimeout(() => { 
+            this.makeRandomMove()
+        }, 2000);
     }
 
     public getChessGame(): Chess {
@@ -35,6 +37,6 @@ export default class GameController {
 
         console.log(this.chessGame.pgn())
         Application.APP.model.updateBoardState(this.chessGame.board());
-        setTimeout(() => { this.makeRandomMove() }, 2000)
+        setTimeout(() => { this.makeRandomMove() }, 300)
       }
 }

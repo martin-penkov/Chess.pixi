@@ -75,10 +75,8 @@ export default class Board extends PIXI.Container {
                     return;
                 }
 
-                // console.log(`will move figure to xpos ${viewCell.xPos}, ypos ${viewCell.yPos}`);
-                // chessGame.get();
                 let figure: Figure = this.figures.find(figure => {
-                    if(figure.figureType !== PieceSprite[cell.type] || (figure.isBlack !== (cell.color === "b") && !figure.currentCell)){
+                    if(figure.figureType !== PieceSprite[cell.type] || (figure.isBlack !== (cell.color === "b"))){
                         return false;
                     }
 
@@ -97,26 +95,15 @@ export default class Board extends PIXI.Container {
                     return true;
                 });
 
+                const piece: Piece = Application.APP.model.getChessGame().get(cell.square);
+                if(viewCell.currentFigure && viewCell.currentFigure.figureType === PieceSprite[piece.type] && viewCell.currentFigure.isBlack === (piece.color === "b")){
+                    //figure not moved
+                    return;
+                }
+
                 if(figure){
                     figure.changeCell(viewCell);
                 }
-                // if((!cell && !viewCell.currentPieceSymbol) || (cell && viewCell.currentPieceSymbol === cell.type && viewCell.color)) {
-                //     return;
-                // }
-
-                // if(!cell || cell.type !== viewCell.currentPieceSymbol){
-                //     viewCell.removeFigure();
-                //     return;
-                // }
-
-                // let sprite = new PIXI.Sprite(Application.APP.loader
-                //     .resources["spriteSheet"]
-                //     .spritesheet
-                //     .textures[`${PieceSprite[cell.type]}-${cell.color === "w" ? "white" : "black"}`]);
-                
-                // viewCell.attachFigure(sprite, cell.type);
-                
-                // //dont destroy sprites, just move them or make them smaller when they are taken for example
             })
         });
     }
