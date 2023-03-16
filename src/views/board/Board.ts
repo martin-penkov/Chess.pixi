@@ -102,6 +102,12 @@ export default class Board extends PIXI.Container {
                 }
 
                 if(figure){
+                    if(viewCell.currentFigure && (viewCell.currentFigure.isBlack !== figure.isBlack)){
+                        //figure taken
+                        viewCell.currentFigure.currentCell = null;
+                        viewCell.currentFigure.visible = false;
+                    }
+
                     figure.changeCell(viewCell);
                 }
             })

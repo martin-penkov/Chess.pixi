@@ -36,6 +36,5 @@ export default class Figure extends PIXI.Container {
             y: this.currentCell.y + this.currentCell.height / 2,
             duration: 0.1
         });
-        
     }
 }
