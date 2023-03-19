@@ -35,8 +35,8 @@ export default class GameController {
         const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)]
         this.chessGame.move(move)
 
-        console.log(this.chessGame.pgn())
+        // console.log(this.chessGame.pgn())
         Application.APP.model.updateBoardState(this.chessGame.board());
-        setTimeout(() => { this.makeRandomMove() }, 300)
+        setTimeout(() => { this.makeRandomMove() }, 1500)
       }
 }

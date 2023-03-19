@@ -19,7 +19,7 @@ export default class Board extends PIXI.Container {
         super();
         this.createBackground();
         this.createCells();
-        this.createFigures();
+        // this.createFigures();
         Application.APP.dispatcher.on(Events.UPDATE_BOARD, this.updateBoard, this);
     }
 
@@ -43,27 +43,7 @@ export default class Board extends PIXI.Container {
             }
           }
     }
-
-    private createFigures(): void {
-        const figureIds = Application.APP.model.getFigureIds();
-
-        for(let key of Array.from(figureIds.keys())) {
-            for (let index = 0; index < figureIds.get(key as PieceSprite); index++) {
-                this.figures.push(new Figure(key, false, this.cellSize));
-            }
-        }
-
-        for(let key of Array.from(figureIds.keys())) {
-            for (let index = 0; index < figureIds.get(key as PieceSprite); index++) {
-                this.figures.push(new Figure(key, true, this.cellSize));
-            }
-        }
-
-        this.figures.forEach(figure => {
-            this.addChild(figure);
-        });
-    }
-
+    
     private updateBoard(): void {
         const boardState: BoardData[][] = Application.APP.model.getCurrentBoardState();
 
@@ -71,47 +51,41 @@ export default class Board extends PIXI.Container {
             row.forEach((cell: BoardData, xPos: number) => {
                 let viewCell: Cell = this.cells.find(cell => cell.xPos === xPos && cell.yPos === yPos)
 
-                if(!cell){
+                if(!cell){   
+                    const prevCellFigure: Figure = this.figures.find(figure => figure.currentCell === viewCell);
+                    if(prevCellFigure) {
+                        this.figures.splice(this.figures.indexOf(prevCellFigure), 1)[0].destroy({children: true});
+                        viewCell.currentFigure = null;
+                    }
                     return;
                 }
 
-                let figure: Figure = this.figures.find(figure => {
-                    if(figure.figureType !== PieceSprite[cell.type] || (figure.isBlack !== (cell.color === "b"))){
-                        return false;
-                    }
-
-                    if(!figure.currentCell){
-                        console.log(`figure has not been used before. is black ${figure.isBlack} ${figure.figureType}`);
-                        return true;
-                    }
-                    const piece: Piece = Application.APP.model.getChessGame().get(figure.currentCell.getCoordinates() as Square);
-                    //check if figure location is still the same or not
-                    //if not then this is the piece we need to move
-                    //optimization for reusing figures
-                    if(figure.figureType === PieceSprite[piece.type] && figure.isBlack === (piece.color === "b")){
-                        return false;
-                    }
-
-                    return true;
-                });
-
-                const piece: Piece = Application.APP.model.getChessGame().get(cell.square);
-                if(viewCell.currentFigure && viewCell.currentFigure.figureType === PieceSprite[piece.type] && viewCell.currentFigure.isBlack === (piece.color === "b")){
-                    //figure not moved
+                if(viewCell.currentFigure && viewCell.currentFigure.figureType === PieceSprite[cell.type] && viewCell.currentFigure.isBlack === (cell.color === "b")){
                     return;
                 }
 
-                if(figure){
-                    if(viewCell.currentFigure && (viewCell.currentFigure.isBlack !== figure.isBlack)){
-                        //figure taken
-                        viewCell.currentFigure.currentCell = null;
-                        viewCell.currentFigure.visible = false;
-                    }
-
-                    figure.changeCell(viewCell);
+                if(viewCell.currentFigure && viewCell.currentFigure.isBlack !== (cell.color === "b")){
+                    this.figures.splice(this.figures.indexOf(viewCell.currentFigure), 1)[0].destroy({children: true});
                 }
+
+                const newFigure: Figure = new Figure(PieceSprite[cell.type], cell.color === "b", this.cellSize, viewCell)
+                viewCell.currentFigure = newFigure
+                this.figures.push(newFigure);
+                this.addChild(newFigure);
             })
         });
+        let count: number = 0;
+        boardState.forEach(COLUMN => {
+            COLUMN.forEach(CELL => {
+                if(CELL !== null){count++;}
+            });
+        });
+
+        // test code !! 
+        // console.log("API FIGURE COUNT IS: " + count + " AND VIEW FIGURE COUNT IS: " + this.figures.length);
+        // if(count !== this.figures.length){
+        //     console.log("figures count doesnt match");
+        // }
     }
 
     private createBackground(): void {
