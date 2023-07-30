@@ -4,4 +4,6 @@ export default class Events {
 
     static INITIALIZE_GAME: string = "INITIALIZE GAME";
     static UPDATE_BOARD: string = "UPDATE BOARD";
+
+    static PAN_VIEW: string = "PAN VIEW";
 }

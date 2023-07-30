@@ -5,6 +5,7 @@ import Controllers from './controllers/Controllers';
 import UrlParameter from './interfaces/UrlParameters';
 import Model from './Model';
 import ViewManager from './views/ViewManager';
+import { GameplayManager } from './utils/GameplayManager';
 
 export default class Application extends PIXI.Application {
     private version: string = "beta-0.1";
@@ -14,6 +15,7 @@ export default class Application extends PIXI.Application {
     public static APP: Application;
     public dispatcher: PIXI.utils.EventEmitter;
     public viewManager: ViewManager;
+    public gameplayManager: GameplayManager;
 
     constructor(options?: PIXI.IApplicationOptions) {
         super(options)
@@ -36,6 +38,7 @@ export default class Application extends PIXI.Application {
         //once authenticated display lobby
         //...
         this.viewManager = new ViewManager();
+        this.gameplayManager = new GameplayManager();
         this.stage.addChildAt(this.viewManager, 0);
         this.dispatcher.emit(Events.INITIALIZE_GAME);
     }
@@ -43,6 +46,7 @@ export default class Application extends PIXI.Application {
     private loadAssets(): void {
         this.loader
         .add("spriteSheet", './assets/chessSprites.json')
+        .add("pawn", './assets/pawn/pawnSheet.json')
         .load(this.createGame);
     }
 
@@ -57,5 +61,14 @@ export default class Application extends PIXI.Application {
             });
 
         return urlParams;
+    }
+
+    public getRendererWidth(): number {
+        return Application.APP.renderer.width;
+    }
+
+    public getRendererHeight(): number {
+        return Application.APP.renderer.height;
+
     }
 }

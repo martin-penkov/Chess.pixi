@@ -20,6 +20,7 @@ export default class GameController {
         setTimeout(() => { 
             this.makeRandomMove()
         }, 2000);
+        
     }
 
     public getChessGame(): Chess {
