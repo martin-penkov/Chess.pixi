@@ -10,10 +10,12 @@ export default class Renderer {
     private currentWorldRotationY: number = 0;
     private stackedSprites: PIXI.Sprite[] = [];
     private defaultspread: number;
+    private zoomLevel: number = 1.0;
 
     constructor(viewManager: ViewManager) {
         this.gameContainer = viewManager;
         Application.APP.dispatcher.on(Events.PAN_VIEW, this.updateRotation, this);
+        Application.APP.dispatcher.on(Events.ZOOM, this.updateZoom, this);
         Application.APP.ticker.add(this.renderTextures);
     }
 
@@ -39,6 +41,11 @@ export default class Renderer {
     }
 
     private updateZoom(zoom: number): void {
+        // Limit the zoom level within a certain range (e.g., 0.5 to 2.0).
+        this.zoomLevel += zoom;
+        this.zoomLevel = Math.max(0.5, Math.min(2.0, this.zoomLevel));
 
+        // Scale the game container to implement zoom.
+        this.gameContainer.scale.set(this.zoomLevel);
     }
 }

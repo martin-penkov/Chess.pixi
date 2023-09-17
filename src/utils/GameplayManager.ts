@@ -19,11 +19,15 @@ createMouseEvents = (): void => {
     document.addEventListener('contextmenu', event => event.preventDefault())
 
     window.addEventListener('wheel', (e: WheelEvent) => {
-        if(e.deltaY < 0){
-            this.keyState['zoomIn'] = true
-        }
-        else if(e.deltaY > 0){
-            this.keyState['zoomOut'] = true
+        // Detect zoom in (positive deltaY) and zoom out (negative deltaY)
+        if (e.deltaY < 0) {
+            this.keyState['zoomIn'] = true;
+            this.keyState['zoomOut'] = false;
+            Application.APP.dispatcher.emit(Events.ZOOM, 0.1);
+        } else if (e.deltaY > 0) {
+            this.keyState['zoomIn'] = false;
+            this.keyState['zoomOut'] = true;
+            Application.APP.dispatcher.emit(Events.ZOOM, -0.1);
         }
     }, {passive: true})
 
